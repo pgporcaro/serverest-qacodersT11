@@ -50,3 +50,4 @@ Excluir o usuario criado
   Set Test Variable    ${RESPOSTA_CONSULTA_APOS_EXCLUSAO}  ${excluir_usuario.json()} 
 Conferir se o usuario foi excluido corretamente
   Log    ${RESPOSTA_CONSULTA_APOS_EXCLUSAO}
+
