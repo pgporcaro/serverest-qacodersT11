@@ -1,5 +1,5 @@
 *** Settings ***
-Resource    ../resources/serverest_testes_recursos.resource
+Resource    ../resources/common.resource
 
 *** Variables ***
 
