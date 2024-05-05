@@ -1,42 +1,33 @@
 name: Robot Framework Tests
 
-on: 
-   push
+on: push
 
 jobs:
-  test:
+  test_api:
+    name: API Testes
+    runs on: ubuntu-latest 
+    
     steps:
-      - name: Checkout Repository
-        # run: echo fazendo o clone do repositório na maquina virtual
+      - name: Clonando um repositório para a máquina virtual
         uses: actions/checkout@v4
-      - name: Set up Python
-        # run: echo instalação da versão 3.12 do Python
+        
+      - name: Instalação do Python
         uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-          
-      # run: echo Instalação das dependências do Projeto
-      - name: Install dependencies
+
+      - name: Instalando Dependencias
+        run: |
+          pip install robotframework
+          pip install robotframework-requests
         
-          run: |
-            pip install robotframework
-            pip install robotframework-requests
-        
-          - name: Run Robot Framework tests
-
-            # run: echo Executando os testes de API do Robot
-           
-           run: |
-
-            robot --outputdir results/ serverest/tests/
-          # no lugar de serverest/tests coloca o caminho da pasta que vc vai usar, onde esta salvo os tests case, ela vai ser salva dentro de uma pasta results, com todos os reports 
-          - name: Test Report
-           # run: echo Salvando o Report dos Testes
+      - name: Rodando os Testes de API
+        run: |
+          robot --outputdir results/ serverest/tests/
           
-          uses: actions/upload-artifact@v4
-          
-          with:
+      - name: Test Report
+        uses: actions/upload-artifact@v4
+        with:
            
-           name: robot-framework-report
-
-           path: results/**
+      - name: robot-framework-report
+        path: results/**
