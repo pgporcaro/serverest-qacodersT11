@@ -1,0 +1,33 @@
+name: Robot Framework Tests
+
+on: push
+
+jobs:
+  test_api:
+    name: API Testes
+    runs on: ubuntu-latest 
+    
+    steps:
+      - name: Clonando um repositório para a máquina virtual
+        uses: actions/checkout@v4
+        
+      - name: Instalação do Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Instalando Dependencias
+        run: |
+          pip install robotframework
+          pip install robotframework-requests
+        
+      - name: Rodando os Testes de API
+        run: |
+          robot --outputdir results/ serverest/tests/
+          
+      - name: Test Report
+        uses: actions/upload-artifact@v4
+        with:
+           
+      - name: robot-framework-report
+        path: results/**
